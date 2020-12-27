@@ -2,18 +2,31 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World! LC</title>
+    <title>Hello World!~LC</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h1>1.Hello World!</h1>
     <p>
         We are using node <script>document.write(process.versions.node)</script>,
         Chrome <script>document.write(process.versions.chrome)</script>,
         and Electron <script>document.write(process.versions.electron)</script>.
     </p>
+
+    <h1>2.More And More!</h1>
+    <div>
+        <h2>Process</h2>
+        <button id="btn01" onclick="getProcessInfo()">点我查看Process信息</button>
+        <button id="btn02" onclick="getArchInfo()">点我查看Arch信息</button>
+        <button id="btn03">点我查看Arch信息2</button>
+        <div id="showProcessId"></div>
+    </div>
+
+    <h1>n.未完待续...</h1>
+<script src="./renderer/renderer.js"></script>
 </body>
 <script>
    console.log("已启动...")
+   // todo md5
 </script>
 </html>
