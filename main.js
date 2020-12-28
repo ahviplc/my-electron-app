@@ -69,9 +69,10 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         console.log("bye 非mac用户 " + author)
         app.quit()
+    } else {
+        // 可以走到这里就是mac用户
+        console.log("bye mac用户 " + author)
     }
-    // 可以走到这里就是mac用户
-    console.log("bye mac用户" + author)
 })
 
 // 在程序关闭窗口前发信号

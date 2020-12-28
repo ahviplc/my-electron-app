@@ -41,7 +41,7 @@ main.js 和 index.html
     "description": "My Electron app",
     "main": "main.js",
     "scripts": {
-        "start": "electron ."
+        "start": "chcp 65001 && electron ."
     }
 }
 
@@ -51,6 +51,16 @@ npm start
 7.如果未安装依赖 请先运行
 npm install
 ```
+
+# Something
+
+> 1.控制台打印时中文乱码问题
+题原因是因为字符编码的问题，Windows下输入chcp,可以查看到当前字符编码，
+如果大家经历过asp时代的话，就知道：每个asp页面代码的顶部，都必须定义一个数字表示的字符集。
+而常见的gb2312的值是936，utf8的值是65001.
+解决办法修改package.json文件
+>
+>  "start": "chcp 65001 && electron ."
 
 # About me
 ```
