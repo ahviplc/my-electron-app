@@ -1,5 +1,7 @@
 // 渲染进程方法集
 
+// 引入nodejs自带模块
+var path = require('path');
 // 引入三方模块
 var md5 = require('md5');
 
@@ -77,4 +79,36 @@ function copyThat() {
         // 通过type获取
         console.log(clipboard.readText('selection'))
     }
+}
+
+// 弹出子窗口
+// 使用window.open
+// 对于#btn06
+function alertPage() {
+    // window.open("http://www.oneplusone.vip","一加壹博客") // http://oneplusone.vip/index.html
+    // 带宽高
+    window.open("http://www.oneplusone.vip","一加壹博客",'height=400, width=600')
+}
+
+// 弹出子窗口
+// 使用remote
+// 对于#btn07
+function alertPage2() {
+    let win = null;
+    BrowserWindow = require('electron').remote.BrowserWindow;
+    // 调用 BrowserWindow打开新窗口
+    win = new BrowserWindow({
+        width: 600,
+        height: 400,
+        // frame:false,
+        // fullscreen:true
+    })
+    // 以下均可
+    win.loadFile(path.join(__dirname, 'templates/pages/alertPage_remote.html')) // 具体输出在README.md
+    // win.loadFile('templates/pages/alertPage_remote.html')
+    // win.loadFile('./templates/pages/alertPage_remote.html')
+    win.on('closed', () => {
+        console.log('win.on closed 子窗口关闭了')
+        win = null;
+    })
 }

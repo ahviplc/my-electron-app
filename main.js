@@ -11,7 +11,10 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            // 在electron 10.0.0之后，remote模块默认关闭
+            // 必须手动设置webPreferences中的enableRemoteModule为true之后才能使用
+            enableRemoteModule: true
         }
     })
 
