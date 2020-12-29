@@ -9,12 +9,35 @@
 <h1 class="index_h1">alertPage_remote</h1>
 <div>
     <h2>按钮</h2>
-    <button id="btn01" onclick="click_me()">点我</button>
+    <button id="btn01" onclick="click_me()">点我,今日诗词</button>
 </div>
 </body>
 <script>
     function click_me() {
-        alert('点我干嘛？')
+        // alert('点我干嘛？')
+        const {net} = require('electron').remote
+        const request = net.request('https://v2.jinrishici.com/one.json')
+        request.on('response', (response) => {
+            console.log(`STATUS: ${response.statusCode}`)
+            console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
+            response.on('data', (chunk) => {
+                // console.log(`BODY: ${chunk}`)
+                // console.log(chunk) // 输出 Buffer
+                // console.log(chunk.toString())
+                // console.log(`${chunk}`)
+                console.log(JSON.parse(chunk.toString()))
+                console.log(`今日诗词:` + JSON.parse(chunk.toString()).data.content)
+                alert(`今日诗词:` + JSON.parse(chunk.toString()).data.content)
+            })
+            response.on('end', () => {
+                console.log('No more data in response.')
+            })
+            response.on('error', () => {
+                console.log('error:' + error)
+                alert('error:' + error)
+            })
+        })
+        request.end()
     }
 </script>
 </html>

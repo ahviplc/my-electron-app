@@ -121,6 +121,12 @@ function alertPage2() {
     win = new BrowserWindow({
         width: 600,
         height: 400,
+        webPreferences: {
+            nodeIntegration: true,
+            // 在electron 10.0.0之后，remote模块默认关闭
+            // 必须手动设置webPreferences中的enableRemoteModule为true之后才能使用
+            enableRemoteModule: true
+        }
         // frame:false,
         // fullscreen:true
     })
