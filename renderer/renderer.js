@@ -81,20 +81,41 @@ function copyThat() {
     }
 }
 
+let subWin = null
 // 弹出子窗口
 // 使用window.open
 // 对于#btn06
 function alertPage() {
     // window.open("http://www.oneplusone.vip","一加壹博客") // http://oneplusone.vip/index.html
     // 带宽高
-    window.open("http://www.oneplusone.vip","一加壹博客",'height=400, width=600')
+    subWin = window.open("http://www.oneplusone.vip", "一加壹博客", 'height=400, width=600');
 }
 
+// 关闭子窗口
+// 使用window.open
+// 对于#btn06_2
+function closeAlertPage() {
+    if (subWin == null) {
+        console.log('subWin为空,无需关闭')
+        return
+    }
+    if (!subWin.closed) {
+        console.log('subWin不为空并且subWin还未关闭,关闭一下')
+        subWin.close()
+        // 再将subWin置成null
+        subWin = null
+    } else {
+        console.log('subWin不为空但是subWin关闭了,直接将subWin=null即可')
+        // 再将subWin置成null
+        subWin = null
+    }
+}
+
+let win = null
 // 弹出子窗口
 // 使用remote
 // 对于#btn07
 function alertPage2() {
-    let win = null;
     BrowserWindow = require('electron').remote.BrowserWindow;
     // 调用 BrowserWindow打开新窗口
     win = new BrowserWindow({
@@ -109,6 +130,20 @@ function alertPage2() {
     // win.loadFile('./templates/pages/alertPage_remote.html')
     win.on('closed', () => {
         console.log('win.on closed 子窗口关闭了')
-        win = null;
+        // 再将win置成null
+        win = null
     })
+}
+
+// 关闭子窗口
+// 使用remote
+// 对于#btn07_2
+function closeAlertPage2() {
+    if (win == null) {
+        console.log('win为空,无需关闭')
+        return
+    }
+    // win = null // 这个只是隐藏 并不是真正关闭
+    win.close() // 这个是真正关闭
+    // win = null // 再将win置成null 在line 127 已经有closed监听事件 进行 win=null 置空了 这边就不需要了
 }
