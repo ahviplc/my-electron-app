@@ -129,6 +129,7 @@ request_token.end()
 > EventEmitter 事件派发器 - 事件派发器是一种模式，它监听一个已命名的事件，触发回调，然后发出该事件并附带一个值。有时这被称为“发布/订阅”模型或监听器。它们指的是同一件事。
 
 > Node.js EventEmitter | 菜鸟教程
+
 > https://www.runoob.com/nodejs/nodejs-event.html
 
 > EventEmitter简单样例
