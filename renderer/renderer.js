@@ -130,10 +130,17 @@ function alertPage2() {
         // frame:false,
         // fullscreen:true
     })
+
+    // ready-to-show事件
+    win.on('ready-to-show', () => {
+        console.log('win.on ready-to-show 子窗口ready-to-show了')
+    })
+
     // 以下均可
     win.loadFile(path.join(__dirname, 'templates/pages/alertPage_remote.html')) // 具体输出在README.md
     // win.loadFile('templates/pages/alertPage_remote.html')
     // win.loadFile('./templates/pages/alertPage_remote.html')
+    // closed事件
     win.on('closed', () => {
         console.log('win.on closed 子窗口关闭了')
         // 再将win置成null

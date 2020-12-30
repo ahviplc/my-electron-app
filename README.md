@@ -13,6 +13,7 @@
 > https://github.com/electron/electron/tree/v11.1.1/docs/fiddles/quick-start
 
 # Quick start & Run it
+
 ```
 1.安装node npm
 node -v
@@ -50,10 +51,13 @@ npm start
 
 7.如果未安装依赖 请先运行
 npm install
+
 ```
 
 # Something
+
 ## 1.控制台打印时中文乱码问题
+
 > 原因是因为字符编码的问题，Windows下输入chcp,可以查看到当前字符编码，
 如果大家经历过asp时代的话，就知道：每个asp页面代码的顶部，都必须定义一个数字表示的字符集。
 而常见的gb2312的值是936，utf8的值是65001.
@@ -81,7 +85,9 @@ const win = new BrowserWindow({
     }
 })
 ```
+
 ## 3. 拼接路径
+
 ```javascript
 // 引入nodejs自带模块
  var path = require('path');
@@ -90,7 +96,56 @@ const win = new BrowserWindow({
 
 > /Volumes/MacOS-SSD-LCKu/DevelopSoftKu/idea/codeKu/my-electron-app/templates/pages/alertPage_remote.html
 
+## 4.获取今日诗词Token代码
+
+```javascript
+// 获取今日诗词token
+ const {net} = require('electron').remote
+// 先获取Token
+// 对于每一个用户第一次访问，先使用 获取 Token ，然后存到 Storage 里面。（ Storage 表示一些长效的储存机制，如 localStorage ，您 不应该存储到运行内存 中）
+const request_token = net.request('https://v2.jinrishici.com/token')
+request_token.on('response', (response) => {
+    console.log(`STATUS: ${response.statusCode}`)
+    console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
+    response.on('data', (chunk) => {
+        // console.log(`BODY: ${chunk}`)
+        console.log(JSON.parse(chunk.toString())) // {"status":"success","data":"7yzsEYo2vZ3zwBG+yfTtWtblmvFbz7QD"}
+        // 存储
+        // 现在改为从localStorage获取token 设置进去对应key为是【jinrishici_token】 
+        localStorage.setItem("jinrishici_token", JSON.parse(chunk.toString()).data);
+    })
+    response.on('end', () => {
+        console.log('No more data in response.')
+    })
+})
+request_token.end()
+```
+> localStorage.getItem('jinrishici_token') 即可从缓存中获取
+
+## 5. Node.js EventEmitter
+
+> EventEmitter 的核心就是事件触发与事件监听器功能的封装.
+
+> EventEmitter 事件派发器 - 事件派发器是一种模式，它监听一个已命名的事件，触发回调，然后发出该事件并附带一个值。有时这被称为“发布/订阅”模型或监听器。它们指的是同一件事。
+
+> Node.js EventEmitter | 菜鸟教程
+> https://www.runoob.com/nodejs/nodejs-event.html
+
+> EventEmitter简单样例
+
+```javascript
+var EventEmitter = require('events').EventEmitter;
+var event = new EventEmitter();
+event.on('some_event', function() {
+    console.log('some_event 事件触发');
+});
+setTimeout(function() {
+    event.emit('some_event');
+}, 10000);
+```
+
 # About me
+
 ```
 https://github.com/ahviplc
 

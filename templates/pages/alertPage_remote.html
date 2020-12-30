@@ -16,7 +16,20 @@
     function click_me() {
         // alert('点我干嘛？')
         const {net} = require('electron').remote
-        const request = net.request('https://v2.jinrishici.com/one.json')
+        // const request = net.request('https://v2.jinrishici.com/one.json')
+        // 请求体 带设置Header请求
+        const request = net.request({
+            method: 'GET',
+            url: 'https://v2.jinrishici.com/one.json', // http://httpbin.org/get
+            headers: {
+                'X-User-Token': '7yzsEYo2vZ3zwBG+yfTtWtblmvFbz7QD'  // 获取 Token 的地址为【https://v2.jinrishici.com/token】,GET方法,Token 用于鉴别和区分每个用户，获取后 永久有效。
+            }
+        });
+        // 手动setHeader setEncoding
+        request.setHeader('Content-Type', 'application/json')
+        // EventEmitter 事件派发器 - 事件派发器是一种模式，它监听一个已命名的事件，触发回调，然后发出该事件并附带一个值。有时这被称为“发布/订阅”模型或监听器。它们指的是同一件事。
+        // 书写各个响应事件 这些当某个对应事件发生时会触发其对应的回调
+        // 响应事件参数也是响应对象而不是正文.您需要在响应对象上设置数据事件,然后侦听结束事件以确保获得所有数据
         request.on('response', (response) => {
             console.log(`STATUS: ${response.statusCode}`)
             console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
@@ -32,9 +45,12 @@
             response.on('end', () => {
                 console.log('No more data in response.')
             })
-            response.on('error', () => {
+            response.on('error', (error) => {
+                console.log(`error: ${JSON.stringify(error)}`)
                 console.log('error:' + error)
-                alert('error:' + error)
+                console.log('error message:' + error.message)
+                alert('error:' + error.message)
+                // Promise.reject(error.message);
             })
         })
         request.end()
