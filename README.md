@@ -51,7 +51,6 @@ npm start
 
 7.如果未安装依赖 请先运行
 npm install
-
 ```
 
 # Something
