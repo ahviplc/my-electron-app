@@ -5,13 +5,64 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "app:win32": "electron-builder --win --ia32",
+    "app:win64": "electron-builder --win --x64",
+    "app:mac": "electron-builder --mac",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "productName": "my-electron-app",
+    "appId": "com.lc",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico",
+      "installerHeaderIcon": "./build/icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "my-electron-app-lc",
+      "include": ""
+    },
+    "files": [
+      "./**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons"
+    }
   },
   "keywords": [],
   "author": "LC",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^11.1.1"
+    "electron": "^11.2.2",
+    "electron-builder": "^22.9.1"
   },
   "dependencies": {
     "md5": "^2.3.0"

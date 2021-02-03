@@ -53,6 +53,35 @@ npm start
 npm install
 ```
 
+# 打包
+```markdown
+这里使用electron-builder进行打包
+执行命令:
+npm i electron --save-dev
+npm i electron-builder --save-dev
+
+然后执行:
+打包win32位安装包 执行-> npm run app:win32
+打包win64位安装包 执行-> npm run app:win64
+打包mac安装包 执行-> npm run app:mac
+
+注意:
+Build for macOS is supported only on macOS, please see 
+> https://electron.build/multi-platform-build
+
+其他配置项 具体去看package.json吧:
+    "files": [
+      "./**/*"
+    ],
+等效于->
+    "files": [
+      "./*",
+      "static/**/*",
+      "renderer/**/*",
+      "templates/**/*"
+    ]
+```
+
 # Something
 
 ## 1.控制台打印时中文乱码问题
