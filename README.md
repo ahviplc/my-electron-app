@@ -183,7 +183,14 @@ https://github.com/ahviplc/my-electron-app
 https://github.com/ahviplc/my-electron-app.git
 ```
 
+---
 > 基于 vue (基本上是它听起来的样子) 来构造 electron 应用程序的样板代码 electron-vue demo 请去下面链接
 
 > ahviplc/my-electron-vue-app: a demo of the electron-vue by LC.
 https://github.com/ahviplc/my-electron-vue-app
+
+---
+> electron与vue-cli3.0脚手架做了很好的融合 使用技术栈以及其版本 比较新的版本
+
+> ahviplc/my-electron-vue3-app: a demo of the electron-vue3 by LC.
+  https://github.com/ahviplc/my-electron-vue3-app
